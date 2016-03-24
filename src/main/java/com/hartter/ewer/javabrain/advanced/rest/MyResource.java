@@ -8,23 +8,27 @@ package com.hartter.ewer.javabrain.advanced.rest;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author eertl
  */
-@Path("test")
-@Singleton
+@Path("{pathparam}/test")
 public class MyResource {
     
-    private int count;
+    @PathParam( "pathparam")
+    private String pathparam;
+    
+    @QueryParam("query")
+    private String queryparam;
     
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String testMethod() {
-        count++;
-        return "It Works:" + count;
+        return "It Works pathparam = " + pathparam + ", queryParam = " + queryparam;
     }
 }
