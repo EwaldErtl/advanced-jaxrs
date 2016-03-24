@@ -3,32 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hartter.ewer.javabrain.advanced.rest;
+package com.hartter.ewer.javabrain.advanced.rest.boundary;
 
-import javax.inject.Singleton;
+import com.hartter.ewer.javabrain.advanced.rest.entity.MyDate;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author eertl
  */
-@Path("{pathparam}/test")
-public class MyResource {
-    
-    @PathParam( "pathparam")
-    private String pathparam;
-    
-    @QueryParam("query")
-    private String queryparam;
+@Path("date/{datestring}")
+public class DateResource {
     
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String testMethod() {
-        return "It Works pathparam = " + pathparam + ", queryParam = " + queryparam;
+    public String getRequestedDate( @PathParam("datestring") MyDate datestring) {
+        return "Got " + datestring;
     }
 }
