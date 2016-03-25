@@ -23,8 +23,8 @@ import javax.ws.rs.ext.Provider;
  * @author eertl
  */
 @Provider
-@Produces(MediaType.TEXT_PLAIN)
-public class DateMessageBodyWriter implements MessageBodyWriter<Date>{
+@Produces("text/shortdate")
+public class ShortDateMessageBodyWriter implements MessageBodyWriter<Date>{
 
     @Override
     public boolean isWriteable(Class<?> type, Type type1, Annotation[] antns, MediaType mt) {
@@ -39,7 +39,8 @@ public class DateMessageBodyWriter implements MessageBodyWriter<Date>{
 
     @Override
     public void writeTo(Date t, Class<?> type, Type type1, Annotation[] antns, MediaType mt, MultivaluedMap<String, Object> mm, OutputStream out) throws IOException, WebApplicationException {
-            out.write(t.toString().getBytes(Charset.forName("UTF-8")));
+        String shortDate = t.getDate() + "-" + t.getMonth() + "-" + t.getYear();
+        out.write( shortDate.getBytes(Charset.defaultCharset()));
     }
     
 }
